@@ -12,19 +12,20 @@ export class AppController {
     return this.appService.pingServiceA();
   }
 
-  @Get('lmao')
-  lmao() {
-    return this.appService.lmao();
-  }
+  // @Get('lmao')
+  // lmao() {
+  //   return this.appService.lmao();
+  // }
 
-  @Get('ping-all')
-  pingAll() {
-    console.log('pinging all');
-    return zip(this.appService.pingServiceA(), this.appService.lmao()).pipe(
-      map(([pongServiceA, resultServiceB]) => ({
-        pongServiceA,
-        resultServiceB,
-      })),
-    );
-  }
+  // @Get('ping-all')
+  // pingAll() {
+  //   console.log('pinging all');
+  //   return zip(this.appService.pingServiceA(), this.appService.lmao()).pipe(
+  //     map(([pongServiceA, resultServiceB]) => ({
+  //       pongServiceA,
+  //       resultServiceB,
+  //     })),
+  //   );
+  // }
+
 }

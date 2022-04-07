@@ -6,7 +6,6 @@ import { map } from 'rxjs/operators';
 export class AppService {
   constructor(
     @Inject('SERVICE_A') private readonly clientServiceA: ClientProxy,
-    @Inject('SERVICE_POST') private readonly clientServicePost: ClientProxy,
   ) {}
 
   pingServiceA() {
@@ -20,10 +19,4 @@ export class AppService {
       );
   }
 
-  lmao() {
-    const pattern = { cmd: 'lmao' };
-    return this.clientServicePost
-      .send<string>(pattern, {})
-      .pipe(map((message: string) => message));
-  }
 }
