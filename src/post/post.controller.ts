@@ -1,4 +1,5 @@
-import { Body, Controller, Get, HttpCode, Inject, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpException, HttpStatus, Inject, Param, Post } from '@nestjs/common';
+import axios from 'axios';
 import createPostDto from './dtos/createPost.dto';
 import editPostDto from './dtos/editPost.dto';
 import { PostService } from './post.service';
@@ -19,12 +20,27 @@ export class PostController {
     }
 
     @Post()
-    create(@Body() createPostDto: createPostDto){
+    async create(@Body() createPostDto: createPostDto){
+        try{
+            return this.postService.create(createPostDto)
+        }
+        catch(err){
+            console.log(err)
+            throw new HttpException('Internal server error', HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    test(createPostDto) {
         return this.postService.create(createPostDto)
     }
 
-    // @Post()
-    // edit(@Body() editPostDto: editPostDto){
-    //     return this
-    // }
+    @Post(':id')
+    edit(@Body() editPostDto: editPostDto, @Param('id') userid: number){
+        return this.postService.edit(userid, editPostDto)
+    }
+
+    @Delete(':id')
+    delete(@Param('id') userid:number){
+        return this.postService.delete(userid)
+    }
 }
